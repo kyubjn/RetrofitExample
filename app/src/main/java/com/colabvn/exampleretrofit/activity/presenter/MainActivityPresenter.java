@@ -7,6 +7,7 @@ import com.colabvn.exampleretrofit.activity.MainActivity;
 import com.colabvn.exampleretrofit.activity.rest.MainActivityClientIml;
 import com.colabvn.exampleretrofit.adapter.GreenHouseAdapter;
 import com.colabvn.exampleretrofit.listeners.OnGetResultListGreenHouse;
+import com.colabvn.exampleretrofit.listeners.OnGetResultLogin;
 import com.colabvn.exampleretrofit.model.GreenHouse;
 
 import java.util.ArrayList;
@@ -14,38 +15,52 @@ import java.util.ArrayList;
 public class MainActivityPresenter   {
     private MainActivity mActivity;
     private MainActivityClientIml client;
-    private ArrayList<GreenHouse> arrGreenhouse;
-    private GreenHouseAdapter adapter;
+//    private ArrayList<GreenHouse> arrGreenhouse;
+//    private GreenHouseAdapter adapter;
 
 
     public MainActivityPresenter(MainActivity mainActivity) {
-        arrGreenhouse=new ArrayList<>();
+      //  arrGreenhouse=new ArrayList<>();
         client = MainActivityClientIml.getInstance(mainActivity);
         mActivity=mainActivity;
-        adapter=new GreenHouseAdapter(mainActivity,0,arrGreenhouse);
+      //  adapter=new GreenHouseAdapter(mainActivity,0,arrGreenhouse);
     }
-public void getListGreenhouse(String province_id) {
-    client.getListGreenhouse(province_id,new OnGetResultListGreenHouse() {
-        @Override
-        public void onSucess(ArrayList<GreenHouse> arr) {
-            setData(arr);
-        }
+//public void getListGreenhouse(String province_id) {
+//    client.getListGreenhouse(province_id,new OnGetResultListGreenHouse() {
+//        @Override
+//        public void onSucess(ArrayList<GreenHouse> arr) {
+//            setData(arr);
+//        }
+//
+//        @Override
+//        public void onFailed(String s) {
+//            Toast.makeText(mActivity,s,Toast.LENGTH_LONG).show();
+//
+//        }
+//    });
+//}
 
-        @Override
-        public void onFailed(String s) {
-            Toast.makeText(mActivity,s,Toast.LENGTH_LONG).show();
+//    private void setData(ArrayList<GreenHouse> arr) {
+//        arrGreenhouse.clear();
+//        arrGreenhouse.addAll(arr);
+//        adapter.notifyDataSetChanged();
+//    }
+//
+//    public GreenHouseAdapter getAdapter() {
+//        return adapter;
+//    }
 
-        }
-    });
-}
+    public void login(String username, String password) {
+        client.login(username,password, new OnGetResultLogin() {
+            @Override
+            public void onSuccess(String s) {
 
-    private void setData(ArrayList<GreenHouse> arr) {
-        arrGreenhouse.clear();
-        arrGreenhouse.addAll(arr);
-        adapter.notifyDataSetChanged();
-    }
+            }
 
-    public GreenHouseAdapter getAdapter() {
-        return adapter;
+            @Override
+            public void onFalied(String s) {
+
+            }
+        });
     }
 }
